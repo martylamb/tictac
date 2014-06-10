@@ -1,0 +1,44 @@
+%% package com.martiansoftware.tictac;
+
+%% template escapeMethod()
+
+    // this method is based upon Android's Html.withinStyle() method, published
+    // under the Apache 2.0 license, retrieved on June 1, 2014 from
+    // http://grepcode.com/file_/repository.grepcode.com/java/ext/com.google.android/android/4.4.2_r1/android/text/Html.java/?v=source
+    // License available at http://www.apache.org/licenses/LICENSE-2.0
+    private static String _tictacEscape(Object o) {
+        if (o == null) return "";
+        String text = o.toString();
+        StringBuilder out = new StringBuilder();
+        int end = text.length();
+        for (int i = 0; i < end; i++) {
+            char c = text.charAt(i);
+            if (c == '<') {
+                out.append("&lt;");
+            } else if (c == '>') {
+                out.append("&gt;");
+            } else if (c == '&') {
+                out.append("&amp;");
+            } else if (c >= 0xD800 && c <= 0xDFFF) {
+                if (c < 0xDC00 && i + 1 < end) {
+                    char d = text.charAt(i + 1);
+                    if (d >= 0xDC00 && d <= 0xDFFF) {
+                        i++;
+                        int codepoint = 0x010000 | (int) c - 0xD800 << 10 | (int) d - 0xDC00;
+                        out.append("&#").append(codepoint).append(";");
+                    }
+                }
+            } else if (c > 0x7E || c < ' ') {
+                out.append("&#").append((int) c).append(";");
+            } else if (c == ' ') {
+                while (i + 1 < end && text.charAt(i + 1) == ' ') {
+                    out.append("&nbsp;");
+                    i++;
+                }
+                out.append(' ');
+            } else {
+                out.append(c);
+            }
+        }
+        return out.toString();
+    }
