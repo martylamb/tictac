@@ -109,7 +109,7 @@ public class MultiTemplateExample {
 
 
 ###Syntax
-Tictac uses three special types of blocks in addition to the plain text of the template itself, called **Java blocks**, **escaped values**, and **unescaped values**.  Each block has a starting delimiter and ending delimiter, **but the ending delimiter is optional**.  If omitted, each block ends at the end of the line.  Thus:
+Tictac uses three special types of blocks in addition to the plain text of the template itself.  These are called **Java blocks**, **escaped values**, and **unescaped values**.  Each block has a starting delimiter and ending delimiter, **but the ending delimiter is optional**.  If omitted, each block ends at the end of the line.  Thus:
 
 ```java
 %% for (int i = 0; i < 10; ++i) { %%
@@ -135,7 +135,7 @@ Unescaped values begin with **<%!** and (optionally) end with **%>**.  These are
 
 ## Invoking the Tictac Compiler
 
-For now, you have to build the jar with Maven and call it via ```java -jar```.  I hope to make this simpler in the future.
+For now, you have to build the jar with Maven and call it via ```java -jar```.  I hope to make this simpler in the future (maybe a Maven plugin?)
 
 To compile a single template, use ```java -jar tictac-1.0-SNAPSHOT.jar TEMPLATEFILE [DESTDIR]```.  If ```DESTDIR``` is omitted, the resulting .java file is placed in the same directory as the template file.
 
