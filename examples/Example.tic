@@ -1,0 +1,8 @@
+%% package tictac.examples
+
+%% import java.util.Date;
+
+%% template sayHello(String name)
+Hello, <% name %>!
+
+It is now <% new Date() %>.

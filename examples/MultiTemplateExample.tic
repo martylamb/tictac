@@ -1,0 +1,10 @@
+%% package tictac.examples;
+%% import java.util.*;
+
+
+%% template sayHello(String name)
+Hello, <% name %>!
+
+%% template sayHello(Collection<String> names)
+%% for (String name: names) sayHello(name);
+I just greeted <% names.size() %> people.
