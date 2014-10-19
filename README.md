@@ -1,6 +1,6 @@
 # tictac: Template Is Compiled To A Class
 
-Tictac is a super-simple template compiler for Java.  It compiles templates to Java source files with static methods that return the generated text.  Methods can take whatever parameters you like, so you end up with type-safe compiled Java code generating your text.
+Tictac is a super-simple template compiler for Java.  It compiles templates to Java source files with static methods that return the generated text as a String.  Methods can take whatever parameters you like, so you end up with type-safe compiled Java code generating your text.
 
 If you've ever used Java Server Pages you get the idea, but tictac uses a slightly different syntax and compiles to Java ahead of time.
 
@@ -51,13 +51,13 @@ public class Example {
 ```
 The classname _Example_ was taken from the template filename _Example.tic_.
 
-You can specify whatever package and imports you like.  This example defines a single "template method" called _sayHello_ which takes a String as a parameter.  The resulting Java method builds and returns a String as specified by the template.
+You can specify whatever package and imports you like.  This example defines a single "template method" called _sayHello_ which takes a String as a parameter.  The resulting Java method builds and returns a String based upon the contents of he template.
 
 Java values can be inserted via the <% _value_ %> markers.  Anything contained within these will be appended to the result after escaping for html safety (so "<" becomes "&amp;lt;", etc.).  Escaping can be avoided by using <%! _value_ %>
 
 ###Inline Java and Multiple Templates per File
 
-You can use arbitrary Java code in your templates and define multiple templates in a single file.  They can even call each other:
+You can use arbitrary Java code in your templates and define multiple templates in a single file.  Templates can even call each other:
 
 ```java
 %% package tictac.examples;
@@ -125,7 +125,7 @@ You can mix and match blocks on a single line if you don't find it too cumbersom
 ```
 
 ####Java Blocks
-Java blocks begin and (optionally) end with **%%**.  They are inserted directly in the template method wherever they are defined.  No effort is made to validate them; that's your Java compiler's job.  Java blocks that begin with "package" and "import" are treated specially and not considered as part of your template methods.  Java blocks that begin with "template" are simplistically transformed into static methods that return a String and have the signature that follows the "template" in the block.
+Java blocks begin and (optionally) end with **%%**.  They are inserted directly in the template method wherever they are defined.  No effort is made to validate them; that's your Java compiler's job.  Java blocks that begin with "package" and "import" are treated specially applied to the generated class rather than any template methods.  Java blocks that begin with "template" are simplistically transformed into static methods that return a String and have the signature that follows the "template" in the block.
 
 ####Escaped Values
 Escaped values begin with **<%** and (optionally) end with **%>**.  These are treated as Java code that returns an Object, which is passed into an auto-generated method to escape the contents for safe inclusion in html.
