@@ -108,7 +108,7 @@ public class MultiTemplateExample {
 ```
 
 
-###Syntax
+### Syntax
 Tictac uses three special types of blocks in addition to the plain text of the template itself.  These are called **Java blocks**, **escaped values**, and **unescaped values**.  Each block has a starting delimiter and ending delimiter, **but the ending delimiter is optional**.  If omitted, each block ends at the end of the line.  Thus:
 
 ```java
@@ -124,13 +124,13 @@ You can mix and match blocks on a single line if you don't find it too cumbersom
 %% for (int i = 0; i < 10; ++i) { %% Item number <% i %> %% } %%
 ```
 
-####Java Blocks
+#### Java Blocks
 Java blocks begin and (optionally) end with **%%**.  They are inserted directly in the template method wherever they are defined.  No effort is made to validate them; that's your Java compiler's job.  Java blocks that begin with "package" and "import" are treated specially applied to the generated class rather than any template methods.  Java blocks that begin with "template" are simplistically transformed into static methods that return a String and have the signature that follows the "template" in the block.
 
-####Escaped Values
+#### Escaped Values
 Escaped values begin with **<%** and (optionally) end with **%>**.  These are treated as Java code that returns an Object, which is passed into an auto-generated method to escape the contents for safe inclusion in html.
 
-####Unescaped Values
+#### Unescaped Values
 Unescaped values begin with **<%!** and (optionally) end with **%>**.  These are treated as Java code that returns an Object, which is **NOT** escaped for safe inclusion in html.  If you have code that generates html you want to use as-is (perhaps another template method?) it should be unescaped.
 
 ## Invoking the Tictac Compiler
